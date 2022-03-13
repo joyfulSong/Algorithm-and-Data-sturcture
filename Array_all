@@ -1,0 +1,70 @@
+#include <iostream>
+#include <array>
+#include <vector>
+#include <string>
+
+void arraySizeAllocate()
+{
+	int num1 = 3;
+	const int num2 = 5;
+
+	int arr1[3];
+	// int arr2[num1]; // 에러 발생. array는 컴파일타임에 크기가 결정되므로, 스택 메모리를 사용해서 크기를 정해야함
+	int arr3[num2];
+
+	std::vector<int> vec1(3);
+	std::vector<int> vec2(num1); // 반면 벡터는 가능
+}
+
+void arrayPointer()
+{
+	int arr[5] = { 1,2,3,4,5 };
+
+	int* ptr1 = arr; // arr 시작 주소값을 가리킴
+	int* ptr2 = &arr[0]; // arr의 0번째 위치의 주소를 가리킴
+
+	// 모두 같은 위치를 가리킨다.
+	std::cout << "arr[0] : " << arr[0] << std::endl;
+	std::cout << "ptr1[0] : " << ptr1[0] << std::endl;
+	std::cout << "ptr2[0] : " << ptr2[0] << std::endl;
+	std::cout << std::endl;
+
+	// 모두 같은 주소값을 가리킨다.
+	std::cout << "&arr : " << &arr << std::endl;
+	std::cout << "ptr1 : " << ptr1 << std::endl;
+	std::cout << "ptr2 : " << ptr2 << std::endl;
+	std::cout << std::endl;
+
+	// 맨앞에서 자료형 크기만큼 1칸 이동한 곳의 주소를 가리킨다.
+	std::cout << "ptr1 + 1 : " << ptr1 + 1 << std::endl;
+	std::cout << "ptr2 + 1 : " << ptr2 + 1 << std::endl;
+	std::cout << std::endl;
+
+	// 모두 맨 앞의 수를 가리킨다.
+	std::cout << "*(arr) : " << *(arr) << std::endl;
+	std::cout << "*(ptr1) : " << *(ptr1) << std::endl;
+	std::cout << "*(ptr2) : " << *(ptr2) << std::endl;
+
+	// arr[0] : 1
+	// ptr1[0] : 1
+	// ptr2[0] : 1
+
+	// &arr : 004FFCD0
+	// ptr1 : 004FFCD0
+	// ptr2 : 004FFCD0
+
+	// ptr1 + 1 : 004FFCD4
+	// ptr2 + 1 : 004FFCD4
+
+	// *(arr) : 1
+	// *(ptr1) : 1
+	// *(ptr2) : 1
+}
+
+int main()
+{
+	arraySizeAllocate();
+	arrayPointer();
+
+	return 0;
+}
