@@ -1,0 +1,185 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    std::vector<int> myvector;
+    for (int i = 1; i <= 5; i++) myvector.push_back(i);
+
+    // begin(), end()
+    for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+
+    // rbegin(), rend()
+    int i = 0;
+    std::vector<int>::reverse_iterator rit = myvector.rbegin();
+    for (; rit != myvector.rend(); ++rit)
+        *rit = ++i;
+    for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+
+    // cbegin(), cend()
+    for (auto it = myvector.cbegin(); it != myvector.cend(); ++it)
+        std::cout << ' ' << *it;
+    std::cout << '\n';
+
+    // crbegin(), crend()
+    for (auto rit = myvector.crbegin(); rit != myvector.crend(); ++rit)
+        std::cout << ' ' << *rit;
+    std::cout << '\n';
+
+    // size()
+    std::vector<int> myints;
+    std::cout << "0. size: " << myints.size() << '\n';
+    for (int i = 0; i < 10; i++) myints.push_back(i);
+    std::cout << "1. size: " << myints.size() << '\n';
+    myints.insert(myints.end(), 10, 100); // 끝에 100 열개 넣기?
+    std::cout << "2. size: " << myints.size() << '\n';
+    myints.pop_back();
+    std::cout << "3. size: " << myints.size() << '\n';
+
+    // maxsize(), capacity()
+    std::cout << "size: " << myvector.size() << "\n";
+    std::cout << "capacity: " << myvector.capacity() << "\n";
+    std::cout << "max_size: " << myvector.max_size() << "\n";
+
+    // resize(), 0 넣고 개수 재조정, 2번째 인자는 재조정할 값(없으면 0)
+    myvector.resize(5);
+    myvector.resize(8, 100); // 이전에 있떤건 두고 추가하는 크기에 대해서만 값 할당
+    myvector.resize(12);
+    for (int i = 0; i < myvector.size(); i++)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    // empty()
+    int sum(0);
+    while (!myvector.empty())
+    {
+        sum += myvector.back();
+        myvector.pop_back();
+    }
+    std::cout << "total: " << sum << '\n';
+
+    // capacity() 처음에 data type에 맞게 size()만큼 메모리를 할당해 주는데, 만약 그 이상으로 size가 넘어갈 시에 재할당 해줌
+    std::vector<int>::size_type sz;
+    std::vector<int> foo;
+    sz = foo.capacity();
+    std::cout << "making foo grow:\n";
+    for (int i = 0; i < 100; ++i) {
+        foo.push_back(i);
+        if (sz != foo.capacity()) {
+            sz = foo.capacity();
+            std::cout << "capacity changed: " << sz << '\n';
+        }
+    }
+
+    // reserve() 와 resize의 차이?
+    /*
+    reserve()는 공간이 예약된다.
+
+    배열을 만들때 int array[크기] 하는것과 같다.
+    만약 앞으로 데이터가 자주 추가된다면 벡터가 가득 찼을때 스스로 공간을 늘리지 않기 때문에 성능을 더 향상할 수 있다.
+    만약 전부 찬상태에서 또 집어넣으면 늘어난다.
+
+
+    resize()는 공간 예약 + 안의 모든 공간을 특정한 값으로 채운다.
+
+    변수를 만들때 쓰레기값이 없게 하기위해 NULL로 초기화 하는것과 비슷하다. ex) int array[10] = {0 ,}
+    현재보다 큰 공간을 예약하면 그만큼 더 집어넣는다. ex) 5개가 들어있는 상태에서 resize(10)하면 5개가 더들어감 -> 5 + 5 = 10
+    용량이 딱 정해져 있다. 더들어 오게 된다면 버려지게 된다.
+*/
+    std::vector<int> bar;
+    sz = bar.capacity();
+    bar.reserve(100);   // this is the only difference with foo above
+    std::cout << "making bar grow:\n";
+    for (int i = 0; i < 100; ++i) {
+        bar.push_back(i);
+        if (sz != bar.capacity()) {
+            sz = bar.capacity();
+            std::cout << "capacity changed: " << sz << '\n';
+        }
+    }
+
+    // at(i)
+    for (unsigned i = 0; i < myvector.size(); i++)
+        myvector.at(i) = i;
+    for (unsigned i = 0; i < myvector.size(); i++)
+        std::cout << ' ' << myvector.at(i);
+    std::cout << '\n';
+
+    // front()
+    std::cout << "myvector.front() is now " << myvector.front() << '\n';
+
+    // data()
+    int* p = myvector.data();
+    *p = 10; // 맨앞
+    ++p; // 두번쨰
+    *p = 20;
+    p[2] = 100; //[0][1<--][2][3<--여기에 넣음]
+    for (unsigned i = 0; i < myvector.size(); ++i)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    // assign(), 첫번째 인자 개수만큼 두번째 인자로 채우기
+    myvector.assign(7, 100);
+    for (unsigned i = 0; i < myvector.size(); ++i)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    // push_back()
+    myvector.push_back(29);
+    for (unsigned i = 0; i < myvector.size(); ++i)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    // pop_back()
+    int sum2(0);
+    while (!myvector.empty())
+    {
+        sum2 += myvector.back();
+        myvector.pop_back();
+    }
+    std::cout << "The elements of myvector add up to " << sum2 << '\n';
+
+    // insert()
+    vector<int>::iterator it3;
+    it3 = myvector.begin();
+    it3 = myvector.insert(it3, 200); //begin에 200 대입
+    myvector.insert(it3, 2, 300); // 위치에 크기 2만큼을 각각 값 300넣어서
+    for (it3 = myvector.begin(); it3 < myvector.end(); it3++)
+        std::cout << ' ' << *it3;
+    std::cout << '\n';
+
+    // erase()
+    myvector.erase(myvector.begin() + 1); //그러면 한칸 당겨짐?
+    for (unsigned i = 0; i < myvector.size(); ++i)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    // swap()
+    std::vector<int> foo2(3, 100);   // three ints with a value of 100
+    std::vector<int> bar2(5, 200);   // five ints with a value of 200
+    foo2.swap(bar2);
+    std::cout << "foo contains:";
+    for (unsigned i = 0; i < foo2.size(); i++)
+        std::cout << ' ' << foo2[i];
+    std::cout << '\n';
+    std::cout << "bar contains:";
+    for (unsigned i = 0; i < bar2.size(); i++)
+        std::cout << ' ' << bar2[i];
+    std::cout << '\n';
+
+    // clear()
+    myvector.clear();
+    myvector.push_back(1101);
+    myvector.push_back(2202);
+    std::cout << "myvector contains:";
+    for (unsigned i = 0; i < myvector.size(); i++)
+        std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+    return 0;
+}
