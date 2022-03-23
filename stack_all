@@ -63,6 +63,13 @@ int main()
 }
 
 /*
+	stack<int> mystack;
+	for (int i = 1; i <= 10; i++) mystack.push(i);
+	cout << "top : " << mystack.top() << '\n';   // 10. 가장 위에 있는 값(마지막 값)
+	cout << endl;
+*/
+
+/*
 
 current size is 5
 
