@@ -1,0 +1,181 @@
+#include <iostream>
+
+#include <queue>
+
+ 
+
+int main()
+
+{
+
+	// stack과 함수 구성이 거의 같지만, stack은 아래에서부터 쌓이고, queue는 뒤로 들어와 앞에서 부터 쌓인다
+
+	std::queue<int> myqueue;
+
+ 
+
+	myqueue.push(1);
+
+	myqueue.push(2);
+
+	myqueue.push(3);
+
+ 
+
+	// queue는 deque와 달리 index 접근이 불가능하다.
+
+	//std::cout << "myQueue[1] : ";
+
+	//for (int i = 0; i < myqueue.size(); ++i)
+
+	//{
+
+	//	std::cout << myqueue[i] << ", ";
+
+	//}
+
+	//std::cout << std::endl;
+
+ 
+
+	std::cout << "poping out queue element ";
+
+	while (!myqueue.empty())
+
+	{
+
+		std::cout << ' ' << myqueue.front();
+
+		myqueue.pop(); // front가 날라감
+
+	}
+
+	std::cout << std::endl << std::endl;
+
+ 
+
+	//front는 가장 앞, back은 가장 뒤 = 가장 최근에 들어온값
+
+	myqueue.push(12);
+
+	myqueue.push(75);   // this is now the back
+
+ 
+
+	myqueue.back() -= myqueue.front();
+
+ 
+
+	std::cout << "myqueue.back() is now " << myqueue.back() << '\n';
+
+ 
+
+	// myqueue contains:  1 2 3
+
+ 
+
+	std::cout << std::endl;
+
+	////////////////////////////////////////////////////
+
+ 
+
+	std::deque<int> mydeque;
+
+	int sum(0);
+
+	mydeque.push_back(10);
+
+	mydeque.push_back(20);
+
+	mydeque.push_back(30);
+
+ 
+
+	std::cout << "front : " << mydeque.front() << std::endl;
+
+	mydeque.pop_front();
+
+	std::cout << "front : " << mydeque.front() << std::endl;
+
+	mydeque.pop_front();
+
+	// front: 10
+
+	// front : 20
+
+ 
+
+	std::cout << std::endl;
+
+ 
+
+	//앞뒤로 넣을 수 있음
+
+	mydeque.push_front(77);
+
+	mydeque.push_back(20);
+
+ 
+
+	mydeque.front() -= mydeque.back();
+
+ 
+
+	std::cout << "mydeque.front() is now " << mydeque.front() << '\n';
+
+	std::cout << std::endl;
+
+ 
+
+	// deque는 index 접근이 가능하다.
+
+	for (int i = 0; i < mydeque.size(); ++i)
+
+	{
+
+		// 둘이 동일하다
+
+		std::cout << mydeque[i] << ", ";
+
+		std::cout << mydeque.at(i) << std::endl;
+
+	}
+
+	std::cout << std::endl;
+
+ 
+
+	// 현재 57 30 20, 30 지워짐
+
+	// erase the '2th' element
+
+	mydeque.erase(mydeque.begin() + 1);
+
+ 
+
+	mydeque.push_back(20);
+
+	// erase the first 2 elements:
+
+	// 57 20 20 중 57만 지움
+
+	mydeque.erase(mydeque.begin(), mydeque.begin() + 1);
+
+ 
+
+	// iterator 사용도 가능하다
+
+	std::deque<int>::iterator it = mydeque.begin();
+
+ 
+
+	while (it != mydeque.end())
+
+		std::cout << *it++ << ' ';
+
+ 
+
+	return 0;
+
+}
