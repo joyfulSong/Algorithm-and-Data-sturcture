@@ -1,0 +1,93 @@
+#include <iostream>
+
+#include <stack>
+
+ 
+
+int main()
+
+{
+
+	std::stack<int> mystack;
+
+ 
+
+	for (int i = 0; i < 5; ++i)
+
+		mystack.push(i);
+
+ 
+
+	while (!mystack.empty())
+
+	{
+
+		std::cout << "current size is " << mystack.size() << std::endl;
+
+		std::cout << "the top of the stack " << mystack.top() << std::endl;
+
+		mystack.pop(); // vector에는 없는 pop이 존재함
+
+	}
+
+	
+
+	std::stack<int> a, b;
+
+	for (int i = 0; i < 3; i++)
+
+	{
+
+		a.push(i); b.push(i + 3);
+
+	}
+
+	a.swap(b);
+
+ 
+
+	for (int i = 0; i < 3; i++)
+
+	{
+
+		std::cout << a.top() << " " << b.top() << std::endl;
+
+		a.pop(); b.pop();
+
+	}
+
+	return 0;
+
+ 
+
+}
+
+/*
+
+current size is 5
+
+the top of the stack 4
+
+current size is 4
+
+the top of the stack 3
+
+current size is 3
+
+the top of the stack 2
+
+current size is 2
+
+the top of the stack 1
+
+current size is 1
+
+the top of the stack 0
+
+5 2
+
+4 1
+
+3 0
+
+*/
