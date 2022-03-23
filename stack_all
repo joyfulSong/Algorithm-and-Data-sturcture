@@ -2,7 +2,7 @@
 
 #include <stack>
 
- 
+ // 인터넷 기록 뒤로가기, 재귀호출 시 RETURN 전까지 쌓다가 돌아가면서 스택 풀어 내려가기
 
 int main()
 
