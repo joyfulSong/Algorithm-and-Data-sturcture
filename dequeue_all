@@ -1,0 +1,56 @@
+#include <iostream>
+#include <queue>
+
+int main()
+{
+	std::deque<int> mydeque;
+	
+	int sum(0);
+	mydeque.push_back(10);
+	mydeque.push_back(20);
+	mydeque.push_back(30);
+	std::cout << "front : " << mydeque.front() << std::endl;
+
+	mydeque.pop_front();
+	std::cout << "front : " << mydeque.front() << std::endl;
+	mydeque.pop_front(); std::cout << std::endl;
+	// front: 10
+	// front : 20
+
+
+	//앞뒤로 넣을 수 있음
+	mydeque.push_front(77);
+	mydeque.push_back(20);
+	mydeque.front() -= mydeque.back();
+
+	std::cout << "mydeque.front() is now " << mydeque.front() << '\n';
+	std::cout << std::endl;
+
+
+	// deque는 index 접근이 가능하다.
+	for (int i = 0; i < mydeque.size(); ++i)
+	{
+		// 둘이 동일하다
+		std::cout << mydeque[i] << ", ";
+		std::cout << mydeque.at(i) << std::endl;
+	}
+	std::cout << std::endl;
+
+
+	// 현재 57 30 20, 30 지워짐
+	mydeque.erase(mydeque.begin() + 1); // erase the '2th' element - 이거 좀 헷갈림
+
+	mydeque.push_back(20);
+
+	// erase the first 2 elements:
+	// 57 20 20 중 57만 지움
+	mydeque.erase(mydeque.begin(), mydeque.begin() + 1); // - 이거랑
+
+
+	// iterator 사용도 가능하다
+	std::deque<int>::iterator it = mydeque.begin();
+	while (it != mydeque.end())
+		std::cout << *it++ << ' ';
+
+	return 0;
+}
