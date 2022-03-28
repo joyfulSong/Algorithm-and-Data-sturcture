@@ -1,0 +1,58 @@
+#include <iostream>
+#include <queue>
+#include <functional>     // std::greater
+
+int main(void)
+{
+	std::priority_queue<std::pair<int, int>> pq; // 자동정렬함. 기본적으로 내림차순
+
+	pq.push(std::make_pair(1, 1)); //넣고 난 뒤 자동정렬됨. pop은 가장 위에 있는거 빼냄
+	pq.push(std::make_pair(2, 15));
+	pq.push(std::make_pair(1, 10));
+	pq.push(std::make_pair(10, 1));
+	pq.push(std::make_pair(10, 3));
+	pq.push(std::make_pair(10, 2));
+	pq.push(std::make_pair(2, 5));
+	pq.push(std::make_pair(1, 2));
+
+	while (!pq.empty())
+	{
+		std::cout << pq.top().first << ", " << pq.top().second << std::endl;
+		pq.pop();
+	}
+
+	std::cout << "--------------------" << std::endl;
+	// 10, 3
+	// 10, 2
+	// 10, 1
+	// 2, 15
+	// 2, 5
+	// 1, 10
+	// 1, 2
+	// 1, 1
+	///////////////////////////////////////////////////////////////
+
+	std::priority_queue<int, std::vector<int>, std::greater<int>> mypq2; // 내림차순. 자료형, 구현체, 비교연산자
+
+	mypq2.push(10);
+	mypq2.push(20);
+	mypq2.push(15);
+	mypq2.push(1);
+	mypq2.push(4);
+	mypq2.push(9);
+
+	std::cout << "mypq2.top() is now " << mypq2.top() << std::endl;
+
+	while (!mypq2.empty())
+	{
+		std::cout << mypq2.top() << ", ";
+		mypq2.pop();
+	}
+	std::cout << std::endl;
+	std::cout << "--------------" << std::endl;
+	// mypq2.top() is now 1
+	// 1, 4, 9, 10, 15, 20,
+	// --------------
+
+	return 0;
+}
