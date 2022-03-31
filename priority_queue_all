@@ -32,8 +32,9 @@ int main(void)
 	// 1, 1
 	///////////////////////////////////////////////////////////////
 
-	std::priority_queue<int, std::vector<int>, std::greater<int>> mypq2; // 내림차순. 자료형, 구현체, 비교연산자
-
+	std::priority_queue<int, std::vector<int>, std::greater<int>> mypq2; // 오름차순. 자료형, 구현체, 비교연산자
+	//  priority_queue <int, vector<int>, cmp> pq3;
+		
 	mypq2.push(10);
 	mypq2.push(20);
 	mypq2.push(15);
@@ -56,3 +57,12 @@ int main(void)
 
 	return 0;
 }
+/* 추가
+greater과 똑같은거
+struct cmp {
+   bool operator()(int a, int b) {
+      return a > b;
+   }
+};
+a < b는 내림차순
+*/
