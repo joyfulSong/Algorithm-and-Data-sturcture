@@ -54,3 +54,39 @@ int main()
 
 	return 0;
 }
+
+/* seoyeon
+   // insert
+   deque<int>::iterator it4 = mydeque.begin();
+   ++it4; // index 1에 삽입
+   mydeque.insert(it4, 9);
+   for (it4 = mydeque.begin(); it4 != mydeque.end(); ++it4)
+      std::cout << ' ' << *it4;
+   std::cout << '\n';
+   
+      // empty
+   int sum(0);
+   while (!mydeque.empty())
+   {
+      sum += mydeque.front();
+      mydeque.pop_front();
+   }
+   cout << "total = " << sum << endl;
+
+   // at
+   deque<int> mydeque_2(10);
+   deque<int>::iterator it_2 = mydeque_2.begin();
+   mydeque_2.at(0) = 100;
+   while (it_2 != mydeque_2.end())
+      cout << ' ' << *it_2++;
+   cout << '\n';
+   
+   // clear
+   mydeque.clear();
+   mydeque.push_back(1101);
+   mydeque.push_back(2202);
+   deque<int>::iterator it5 = mydeque.begin();
+   while (it5 != mydeque.end())
+      cout << ' ' << *it5++;
+   cout << '\n';
+*/
