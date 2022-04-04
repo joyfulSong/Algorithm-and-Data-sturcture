@@ -1,0 +1,111 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+
+int main()
+{
+	std::list<int> mylist;
+	std::list<std::string>  str_list;
+
+	// push_back
+	mylist.push_back(10);
+	mylist.push_back(11);
+	mylist.push_back(12);
+
+	//iterator
+	std::cout << "[1] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+
+	//////////////////////////////////////////////////////// [1] 10, 11, 12,
+
+	//pop_back
+	mylist.pop_back();
+
+	std::cout << "[2] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [2] 10, 11,
+
+	//push_front
+	mylist.push_front(9);
+	mylist.push_front(8);
+
+	std::cout << "[3] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [3] 8, 9, 10, 11,
+
+	//pop_front
+	mylist.pop_front();
+
+	std::cout << "[4] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [4] 9, 10, 11,
+
+	//string 형 list라면
+	str_list.push_back("hysong");
+	str_list.push_front(" ");
+	str_list.push_front("aka");
+	str_list.push_front("are you");
+
+	str_list.remove("are you"); // 공백도 한꺼번에 하나로 저장
+
+	std::cout << "[5] ";
+	for (std::list<std::string>::iterator it = str_list.begin(); it != str_list.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+	//////////////////////////////////////////////////////// [5] aka  hysong
+
+	/// remove, 특정 원소 제거가능
+	mylist.remove(10); 
+	
+	std::cout << "[7] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [7] 9, 11,
+
+	//earse, 특정 위치의 원소 제거, iterator로 위치 가리켜야함
+	std::list<int>::iterator it = mylist.begin();
+	mylist.erase(++it); // 두번째 자리 지움. 리턴값은 지운 자리. 예를들어 it = mylist.erase(++it); 하면 it의 자리는 list의 두번째를 가리키게됨.
+	// 범위로도 지울 수 있음 mylist.erase(it1, it2)
+
+	std::cout << "[8] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [8] 9,
+
+	// https://www.cplusplus.com/reference/list/list/insert
+	// 리스트에서 insert는 it의 자리에 값을 추가해주는 것임
+	std::list<int>::iterator it2 = mylist.begin();
+
+	mylist.push_back(20); /// 9, 20
+	mylist.insert(++it2, 15); /// 9, 15, 20
+
+	std::cout << "[9] ";
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [9] 9, 15, 20,
+
+	it = mylist.begin(); // 왜 --it 하고서 사용하면 오류가 나는지.
+	std::vector<int> myvector(2, 30); // 30, 30
+	mylist.insert(it, myvector.begin(), myvector.end());
+
+	std::cout << "[10] ";
+	for (it = mylist.begin(); it != mylist.end(); ++it)
+		std::cout << *it << ", ";
+	std::cout << std::endl;
+	//////////////////////////////////////////////////////// [10] 30, 30, 9, 15, 20,
+
+	return 0;
+}
