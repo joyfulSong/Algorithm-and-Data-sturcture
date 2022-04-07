@@ -7,7 +7,10 @@ int main()
 {
 	std::list<int> mylist;
 	std::list<std::string>  str_list;
-
+	
+	//assign
+	my_list.assign(3, 100); // 3개의 100을 
+	
 	// push_back
 	mylist.push_back(10);
 	mylist.push_back(11);
