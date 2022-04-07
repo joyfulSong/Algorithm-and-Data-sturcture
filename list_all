@@ -95,12 +95,12 @@ int main()
 	mylist.insert(++it2, 15); /// 9, 15, 20
 
 	std::cout << "[9] ";
-	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it)
+	for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it) // 이 iterator는 local 변수
 		std::cout << *it << ", ";
 	std::cout << std::endl;
 	//////////////////////////////////////////////////////// [9] 9, 15, 20,
 
-	it = mylist.begin(); // 왜 --it 하고서 사용하면 오류가 나는지.
+	it = mylist.begin(); // 이 it는 위에서 erase를 거쳐서 연결이 끊긴놈임. 재연결 하거나, 재선언해야함.
 	std::vector<int> myvector(2, 30); // 30, 30
 	mylist.insert(it, myvector.begin(), myvector.end());
 
