@@ -71,8 +71,11 @@ int main()
 		cout << it2->first << " => " << it2->second << '\n';
 	cout << endl;
 
-
-
+	//key 기준으로 정렬됨.
+	 mymap.insert(pair<char, int>('a', 100));
+         mymap.insert(pair<char, int>('b', 200));
+         mymap.insert(pair<char, int>('d', 300));
+         mymap.insert(pair<char, int>('c', 400));
 
 	return 0;
 }
