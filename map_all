@@ -1,0 +1,78 @@
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+int main()
+{
+	std::map<std::string, int> mymap;
+
+	mymap.insert(std::make_pair("aa", 10));
+	mymap.insert(std::make_pair("bb", 20)); //mymap.insert(std::pair<std::string, int>("cc", 30));
+
+	for (auto it = mymap.begin(); it != mymap.end(); ++it)
+		std::cout << it->first << " " << it->second << std::endl;
+	std::cout << std::endl;
+
+	//aa 10
+	//bb 20
+	mymap["cc"] = 30; // 만약 중복해서 넣을 경우 안들어감
+	mymap["dd"] = 40;
+
+	for (auto it = mymap.begin(); it != mymap.end(); ++it)
+		std::cout << it->first << " " << it->second << std::endl;
+	std::cout << std::endl;
+	/*aa 10
+	aa 10
+	bb 20
+    cc 30
+	dd 40*/
+
+	/////////////////////////////////////////////////////////////////
+
+	mymap["dd"] = 50; //크기 상관없이 기존값이 없어지고 새값이 들어감
+	// map[key]로 접근하기
+	std::cout << "mymap[aa] : " << mymap["aa"] << std::endl;
+	std::cout << "mymap[dd] : " << mymap["dd"] << std::endl;
+
+	// count (있으면 1 출력)
+	std::cout << "mymap.count(cc) : " << mymap.count("cc") << std::endl;
+	std::cout << "mymap.count(dd) : " << mymap.count("dd") << std::endl;
+	std::cout << std::endl;
+	/*mymap[aa] : 10
+	mymap[dd] : 50
+	mymap.count(cc) : 1
+	mymap.count(dd) : 1*/
+
+	/////////////////////////////////////////////////////////////////
+	std::map<std::string, int>::iterator it;
+	it = mymap.find("bb");
+	if (it != mymap.end())
+		mymap.erase(it); //erase("bb") 가능
+
+	for (auto it = mymap.begin(); it != mymap.end(); ++it)
+		std::cout << it->first << " " << it->second << std::endl;
+	std::cout << std::endl;
+	/*aa 10
+	cc 30
+	dd 30*/
+
+	// 표시 - at
+	map<string, int> mymap2 = {
+			 { "alpha", 0 },
+			 { "beta", 0 },
+			 { "gamma", 0 } };
+	map<string, int>::iterator it2 = mymap2.begin();
+	mymap2.at("alpha") = 10;
+	mymap2.at("beta") = 20;
+	mymap2.at("gamma") = 30;
+	cout << "<at>" << endl;
+	for (it2 = mymap2.begin(); it2 != mymap2.end(); ++it2)
+		cout << it2->first << " => " << it2->second << '\n';
+	cout << endl;
+
+
+
+
+	return 0;
+}
