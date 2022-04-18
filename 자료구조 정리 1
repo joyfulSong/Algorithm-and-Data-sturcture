@@ -50,3 +50,4 @@ vector, stack, list, array_list - 미리 할당해놓은 배열의 크기가 .ca
 queue, deque, set, map
 
 set, map은 key, value를 갖는 연관컨테이너이다
+set에서 value 추가된게 map, 둘다 정렬가능. hash는 map으로 풀 수 있고 공식적으로 stl 지원안됨
