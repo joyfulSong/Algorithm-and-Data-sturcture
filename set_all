@@ -1,0 +1,85 @@
+#include <iostream>
+#include <set>
+
+// 입력값이 자동으로 오름차순으로 정렬된다.
+// each value must be unique
+// generally slower than unordered_set containers to access individual elements by their key, 
+// but they allow the direct iteration on subsets based on their order.
+
+// 중복삽입 안됨
+// 
+
+int main()
+{
+	std::set<int> myset; //  set<int, greater<int>> 시 내림차순
+
+	myset.insert(1);
+	myset.insert(10);
+	myset.insert(20);
+	myset.insert(5);
+
+	for (auto it = myset.begin(); it != myset.end(); ++it)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
+
+	myset.erase(10);
+
+	for (auto it = myset.begin(); it != myset.end(); ++it)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
+
+	std::cout << "size: " << myset.size() << std::endl;
+	/*
+	1 5 10 20
+	1 5 20
+	size: 3
+	*/
+	
+	//string
+	std::set<std::string> s;
+
+	char ch1[10] = "hello";
+	char ch2[10] = "world";
+
+	s.insert(ch1);
+	s.insert(ch2);
+
+	std::cout << "s.size(): " << s.size() << std::endl;
+
+	for (const auto& ele : s)
+	{
+		std::cout << ele << std::endl;
+	}
+
+	// s.size() : 2
+	// hello
+	// world
+	
+	/////////////////////////////////////////////////////////
+	std::set<std::string>::iterator it1 = s.find(ch1);
+	if (it1 != s.end())
+		std::cout << "it1: " << *it1 << std::endl;
+
+	std::set<std::string>::iterator it2 = s.find("hel");
+	if (it2 != s.end())
+		std::cout << "it2: " << *it2 << std::endl;
+	//출력안됨
+
+	s.erase("hello");
+
+	std::set<std::string>::iterator it4 = s.find("hello");
+	if (it4 != s.end())
+		std::cout << "it4: " << *it4 << std::endl;
+	//출력안됨
+
+	/////////////////////////////////////////////////////////
+	while (!s.empty())
+	{
+		std::cout << *s.begin();
+		s.erase(s.begin());
+	}
+	std::cout << '\n';
+	// world
+
+	return 0;
+}
