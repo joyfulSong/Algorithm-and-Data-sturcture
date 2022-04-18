@@ -44,9 +44,9 @@ list - std::list<int>::iterator it = mylist.begin(), .end()
 
 [size()와 size()가 아닌것]
 vector - 미리 할당해놓은 배열의 크기가 .capacity(), 할당해놓은 배열에 들어 있는 원소의 수가 .size()
-vector, list, array_list - 미리 할당해놓은 배열의 크기가 .capacity(), 할당해놓은 배열에 들어 있는 원소의 수가 .size()
+vector, stack, list, array_list - 미리 할당해놓은 배열의 크기가 .capacity(), 할당해놓은 배열에 들어 있는 원소의 수가 .size()
 
 [capacity 없는것]
-stack, queue, deque
+queue, deque, set, map
 
 set, map은 key, value를 갖는 연관컨테이너이다
