@@ -56,7 +56,7 @@ int main()
 	// world
 	
 	/////////////////////////////////////////////////////////
-	std::set<std::string>::iterator it1 = s.find(ch1);
+	std::set<std::string>::iterator it1 = s.find(ch1); //find에서 반복자를 return. 없으면 end()리턴
 	if (it1 != s.end())
 		std::cout << "it1: " << *it1 << std::endl;
 
