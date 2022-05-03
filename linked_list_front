@@ -1,0 +1,142 @@
+#include <iostream>
+
+struct Node
+{
+	int data;
+	Node* nextNode;
+};
+
+class LinkedList
+{
+private:
+	Node* head;
+	Node* tail;
+
+public:
+	LinkedList()
+	{
+		// head와 tail의 포인터를 초기화
+		head = NULL;
+		tail = NULL;
+	}
+
+	void AddFrontNode(int n);
+	void AddBackNode(int n);
+	void InsertNode(Node* prevNode, int n);
+	void DeleteNode(Node* prevNode);
+
+	Node* GetHead()
+	{
+		return head;
+	}
+
+	void Display(Node* head);
+};
+
+void LinkedList::AddFrontNode(int n)
+{
+	Node* temp = new Node;
+	temp->data = n;
+
+	if (head == NULL)
+	{
+		head = temp;
+		tail = temp;
+	}
+	else
+	{
+		temp->nextNode = head;
+		head = temp;
+	}
+}
+
+void LinkedList::AddBackNode(int n)
+{
+	Node* temp = new Node;
+
+	temp->data = n;
+	temp->nextNode = NULL;
+
+	if (head == NULL)
+	{
+		head = temp;
+		tail = temp; //head랑 tail이 일치되는걸까? 주솟값까지
+	}
+	else
+	{
+		tail->nextNode = temp;
+		tail = temp;
+	}
+}
+
+void LinkedList::InsertNode(Node* prevNode, int n)
+{
+	Node* temp = new Node;
+	temp->data = n;
+	temp->nextNode = prevNode->nextNode;
+	prevNode->nextNode = temp;
+}
+
+void LinkedList::DeleteNode(Node* prevNode)
+{
+	// 삭제할 node의 prev를 인자로 받음
+	Node* temp = prevNode->nextNode;
+	prevNode->nextNode = temp->nextNode;
+	delete temp;
+
+	/* 위: nextNode를 뒷거로 지정후 가운데 삭제,
+	* 아래: 앞에거 지우고 한칸씩 뒤로 이동
+	// 삭제해보기
+	if (head == NULL)
+		return 0;
+	else
+	{
+		Node* delNode = head;
+		Node* delNextNode = head->next;
+
+		cout << "head 부터 tail 까지 삭제" << endl;
+		cout << head->data << " 을 삭제합니다" << endl;
+		free(delNode);
+
+		while (delNextNode != NULL)
+		{
+			delNode = delNextNode;
+			delNextNode = delNextNode->next;
+
+			cout << delNode->data << " 을 삭제합니다" << endl;
+			free(delNode);
+		}
+	}
+	*/
+}
+
+void LinkedList::Display(Node* head)
+{
+	if (head == NULL)
+	{
+		std::cout << "\n";
+	}
+	else
+	{
+		std::cout << head->data << " ";
+		Display(head->nextNode);
+	}
+	std::cout << std::endl;
+}
+
+int main()
+{
+	LinkedList a;
+
+	a.AddBackNode(1);
+	a.AddBackNode(2);
+	a.AddBackNode(3);
+	a.Display(a.GetHead());
+
+	a.AddFrontNode(0);
+	a.InsertNode(a.GetHead()->nextNode->nextNode, 9);
+	a.Display(a.GetHead());
+
+	a.DeleteNode(a.GetHead()->nextNode);
+	a.Display(a.GetHead());
+}
