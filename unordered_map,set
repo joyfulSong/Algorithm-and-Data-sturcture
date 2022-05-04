@@ -1,0 +1,116 @@
+// https://woo-dev.tistory.com/106 설계관점에서 딥하게 보려면 
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+
+struct Node
+{
+	std::string name;
+	std::string nick;
+	bool valid;
+	int age;
+};
+int main()
+{
+    std::unordered_map<std::string, double> mymap1 = {
+       {"mom",5.4}, //mymap1.insert(make_pair("mom",5.4)), mymap1["mom"] = 5.4, mymap1.insert({"mom", 5.4})
+       {"dad",6.1},
+       {"bro",5.9} };
+
+    std::string input;
+    std::cout << "who? ";
+    getline(std::cin, input);
+
+    std::unordered_map<std::string, double>::iterator got = mymap1.find(input); //있다면 해당되는 반복자 리턴
+    
+    //mymap1.erase("mom"); 삭제 가능, set과 마찬가지로 size, empty, count, bucket 사용 가능
+
+    if (got == mymap1.end())
+        std::cout << "not found";
+    else
+        std::cout << got->first << " is " << got->second;
+
+    std::cout << std::endl;
+
+	/////////////////////////////////////////////////
+
+	std::unordered_map<std::string, Node> mymap;
+
+	Node node[3] = {
+		{"kim", "aa", true, 10},
+		{"lee", "bb", false, 20},
+		{"koo", "cc", true, 30}
+	};
+
+	for (int i = 0; i < 3; ++i)
+	{
+		mymap[node[i].name] = node[i];
+	}
+
+	std::string str1 = "kim"; // 일부를 통해 찾을 수 있다.
+	std::string str2 = "lee";
+
+	std::cout << mymap[str1].name << std::endl;
+	std::cout << mymap[str1].nick << std::endl;
+	std::cout << mymap[str1].valid << std::endl;
+	std::cout << mymap[str1].age << std::endl;
+	std::cout << std::endl;
+
+	std::cout << mymap[str2].name << std::endl;
+	std::cout << mymap[str2].nick << std::endl;
+	std::cout << mymap[str2].valid << std::endl;
+	std::cout << mymap[str2].age << std::endl;
+
+	// kim
+	// aa
+	// 1
+	// 10
+
+	// lee
+	// bb
+	// 0
+	// 20
+
+	/////////////////////////////////////////////////
+
+	std::unordered_set<int> myset;
+
+	myset.insert(20);
+	myset.insert(10);
+	myset.insert(1000);
+	myset.insert(100);
+	myset.insert(5);
+	myset.insert(1);
+
+	for (auto it = myset.begin(); it != myset.end(); ++it)
+		std::cout << *it << ' ';
+	std::cout << std::endl; //순서데로 출력 안됨
+
+	myset.erase(10); // 10 삭제
+
+	for (auto it = myset.begin(); it != myset.end(); ++it)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
+  
+  std::cout << "is empty? " << myset.empty() << std::endl; // false
+	std::cout << "size: " << myset.size() << std::endl; //원소 갯수 출력
+  
+  myset.insert(5);
+  std::cout << "count \"5\" = " << myset.count(5) << std::endl; // "5"가 몇개인지 세기
+  
+  std::cout << "bucket = " << myset.bucket(5) << std::endl; // 5가 저장된 주소 리턴 
+
+	/*
+	100 20 10 1 1000 5
+	100 20 1 1000 5
+	size: 5
+	*/
+
+	// unordered_set은 set과 달리 정렬이 안됨
+	// 내가 만든 클래스를 이용할 경우 '해시 함수'를 직접 만들어야해서 까다롭기에 그냥 set을 이용할 것
+  // key는 무한한데 bucket은 유한하므로, 해쉬 충돌을 막기 위해서는 bucket에 대한 고려가 필요하다.
+
+	return 0;
+}
