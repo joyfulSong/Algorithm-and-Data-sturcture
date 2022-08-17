@@ -10,7 +10,7 @@ struct tree_node
 
 class BST
 {
-	tree_node* root;
+	tree_node* root; //이게 감춰져있으므로, 외부함수 통해서 내부함수로 들어와야함. 감춘 이유: 외부에서 시작점을 일일이 알 필요가 없어서.
 	// 내부 함수. main에선 root와 이 함수들에 직접 접근 안되고 public 함수 통해서 접근해야함 (객체를 통해 접근해서 그런거지?)
 	void insert(tree_node*, int);
 	bool search(int, tree_node*);
