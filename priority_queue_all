@@ -32,7 +32,13 @@ int main(void)
 	// 1, 1
 	///////////////////////////////////////////////////////////////
 
-	std::priority_queue<int, std::vector<int>, std::greater<int>> mypq2; // 오름차순. 자료형, 구현체, 비교연산자
+	std::priority_queue<int, std::vector<int>, std::greater<int>> mypq2; // 오름차순. 자료형, 구현체, 비교연산자. vector<int>는 컨테이너. 굳이 지정안해도 됨
+	//예
+	std::priority_queue<int> first;
+	std::priority_queue<int> second (myints,myints+4);
+ 	std::priority_queue<int, std::vector<int>, std::greater<int>> third (myints,myints+4);
+	
+	
 	//  priority_queue <int, vector<int>, cmp> pq3;
 		
 	mypq2.push(10);
