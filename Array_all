@@ -15,7 +15,7 @@ void arraySizeAllocate()
 	std::vector<int> vec1(3);
 	std::vector<int> vec2(num1); // 반면 벡터는 가능
 }
-//std::array<int, 10> myarr{ 2,4,6,8,10,1,3,5,7,9 }; 타입, 
+//std::array<int, 10> myarr{ 2,4,6,8,10,1,3,5,7,9 }; 타입, 개수
 
 void arrayPointer()
 {
